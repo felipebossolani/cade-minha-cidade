@@ -4,7 +4,7 @@ O Brasil tem 5.570 municípios. E alguém colocou todos num dropdown.
 
 Um manifesto-interativo sobre por que dropdowns de cidade são uma experiência horrível e precisam ser substituídos por autocomplete.
 
-**[→ Acesse o site](https://felipebossolani.github.io/cade-cidade/)**
+**[→ Acesse o site](https://felipebossolani.github.io/cade-minha-cidade/)**
 
 ## O que tem aqui
 
