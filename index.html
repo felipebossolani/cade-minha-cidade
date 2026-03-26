@@ -385,8 +385,8 @@
       <p>Digita "Sor" e aparece Sorocaba. Digita "Ube" e aparece Uberlândia. Digita "Vot" e aparece Votuporanga.</p>
       <p>3 letras. 1 clique. Acabou.</p>
       <div class="demo-box">
-        <input type="text" id="autocomplete-input" placeholder="Digite sua cidade..." inputmode="text" autocomplete="off">
-        <ul id="autocomplete-list" class="autocomplete-suggestions"></ul>
+        <input type="text" id="autocomplete-input" placeholder="Digite sua cidade..." inputmode="text" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="autocomplete-list" aria-autocomplete="list">
+        <ul id="autocomplete-list" class="autocomplete-suggestions" role="listbox"></ul>
         <p class="demo-feedback highlight-green" id="autocomplete-feedback"></p>
       </div>
       <p>Não precisa de biblioteca pesada. Não precisa de API externa. Uma lista de municípios do IBGE em JSON, um input com evento de digitação, e um filtro. São 20 linhas de JavaScript.</p>
@@ -556,7 +556,7 @@
       function showSuggestions(term) {
         list.innerHTML = '';
         activeIndex = -1;
-        if (term.length < 2) return;
+        if (term.length < 2) { input.setAttribute('aria-expanded', 'false'); return; }
 
         const lower = term.toLowerCase();
         const results = MUNICIPIOS.filter(function(m) {
@@ -565,17 +565,22 @@
 
         results.forEach(function(m, i) {
           const li = document.createElement('li');
+          li.setAttribute('role', 'option');
+          li.id = 'autocomplete-option-' + i;
           li.innerHTML = highlightMatch(m[0], term) + ' <span style="opacity:0.5">— ' + m[1] + '</span>';
           li.addEventListener('click', function() {
             selectCity(m[0] + ' — ' + m[1]);
           });
           list.appendChild(li);
         });
+        input.setAttribute('aria-expanded', results.length > 0 ? 'true' : 'false');
       }
 
       function selectCity(value) {
         input.value = value;
         list.innerHTML = '';
+        input.setAttribute('aria-expanded', 'false');
+        input.removeAttribute('aria-activedescendant');
         feedback.textContent = '3 letras. 1 clique. Sem dropdown. Sem scroll.';
       }
 
@@ -600,11 +605,17 @@
         items.forEach(function(item, i) {
           item.classList.toggle('active', i === activeIndex);
         });
+        if (activeIndex >= 0 && items[activeIndex]) {
+          input.setAttribute('aria-activedescendant', items[activeIndex].id);
+        } else {
+          input.removeAttribute('aria-activedescendant');
+        }
       });
 
       document.addEventListener('click', function(e) {
         if (!e.target.closest('#autocomplete-input') && !e.target.closest('#autocomplete-list')) {
           list.innerHTML = '';
+          input.setAttribute('aria-expanded', 'false');
         }
       });
     })();
