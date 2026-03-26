@@ -275,6 +275,22 @@
     </section>
 
     <section id="demo-cascata">
+      <h2 class="highlight-red">"Tá, mas o meu tem estado primeiro."</h2>
+      <p>O clássico. Primeiro um dropdown de 27 estados. Seleciona. Aí carrega o dropdown de cidades daquele estado.</p>
+      <p>Testa.</p>
+      <div class="demo-box">
+        <select id="cascata-estado">
+          <option value="">Selecione o estado...</option>
+        </select>
+        <select id="cascata-cidade" style="margin-top: 12px" disabled>
+          <option value="">Selecione a cidade...</option>
+        </select>
+        <p class="counter" id="cascata-counter"></p>
+        <p class="demo-feedback" id="cascata-feedback"></p>
+      </div>
+      <p>Melhor? Um pouco. Mas se você é de São Paulo, ainda são 645 cidades. Minas, 853. Bahia, 417. Continua scrollando.</p>
+      <p>E se a lista demora pra carregar? E se você seleciona o estado errado e tem que voltar? E no celular, onde o dropdown nativo ocupa a tela inteira com uma roletinha?</p>
+      <p>É menos pior. Ainda é ruim.</p>
     </section>
 
     <section id="solucao">
@@ -333,6 +349,69 @@
           const cidade = MUNICIPIOS[select.value][0];
           counter.textContent = '';
           feedback.innerHTML = 'Levou <span class="highlight-yellow">' + elapsed + ' segundos</span> pra achar <strong>' + cidade + '</strong> entre <span class="highlight-red">5.570 opções</span>.';
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    // Demo 2: Estado + Cidade cascata
+    (function() {
+      const estados = [
+        ["AC","Acre"],["AL","Alagoas"],["AP","Amapá"],["AM","Amazonas"],
+        ["BA","Bahia"],["CE","Ceará"],["DF","Distrito Federal"],["ES","Espírito Santo"],
+        ["GO","Goiás"],["MA","Maranhão"],["MT","Mato Grosso"],["MS","Mato Grosso do Sul"],
+        ["MG","Minas Gerais"],["PA","Pará"],["PB","Paraíba"],["PR","Paraná"],
+        ["PE","Pernambuco"],["PI","Piauí"],["RJ","Rio de Janeiro"],["RN","Rio Grande do Norte"],
+        ["RS","Rio Grande do Sul"],["RO","Rondônia"],["RR","Roraima"],["SC","Santa Catarina"],
+        ["SP","São Paulo"],["SE","Sergipe"],["TO","Tocantins"]
+      ];
+
+      const selEstado = document.getElementById('cascata-estado');
+      const selCidade = document.getElementById('cascata-cidade');
+      const counter = document.getElementById('cascata-counter');
+      const feedback = document.getElementById('cascata-feedback');
+      let startTime = null;
+      let started = false;
+
+      estados.forEach(function(e) {
+        const opt = document.createElement('option');
+        opt.value = e[0];
+        opt.textContent = e[0] + ' — ' + e[1];
+        selEstado.appendChild(opt);
+      });
+
+      selEstado.addEventListener('focus', function() {
+        if (!started) {
+          startTime = Date.now();
+          started = true;
+        }
+      });
+
+      selEstado.addEventListener('change', function() {
+        const uf = selEstado.value;
+        selCidade.innerHTML = '<option value="">Selecione a cidade...</option>';
+        if (!uf) { selCidade.disabled = true; return; }
+
+        const cidades = MUNICIPIOS.filter(function(m) { return m[1] === uf; });
+        cidades.forEach(function(m, i) {
+          const opt = document.createElement('option');
+          opt.value = m[0];
+          opt.textContent = m[0];
+          selCidade.appendChild(opt);
+        });
+        selCidade.disabled = false;
+
+        const nomeEstado = estados.find(function(e) { return e[0] === uf; })[1];
+        counter.innerHTML = nomeEstado + ': <span class="highlight-yellow">' + cidades.length + ' cidades</span>. Boa sorte.';
+      });
+
+      selCidade.addEventListener('change', function() {
+        if (started && selCidade.value !== '') {
+          started = false;
+          const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+          counter.textContent = '';
+          feedback.innerHTML = '2 dropdowns. <span class="highlight-yellow">' + elapsed + ' segundos</span>. Ou um campo de texto em 2.';
         }
       });
     })();
