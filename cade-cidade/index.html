@@ -268,6 +268,57 @@
       font-weight: 700;
       color: #00FF41;
     }
+
+    /* Fade-in animation */
+    section, header {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    section.visible, header.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Link styling for content */
+    main a, section a {
+      color: #00FF41;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    main a:hover, section a:hover {
+      border-bottom-color: #00FF41;
+    }
+
+    /* Better select on mobile */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      pre {
+        padding: 14px 16px;
+        font-size: 12px;
+      }
+
+      .share-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .share-links a, .share-links button {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -566,6 +617,23 @@
             document.getElementById('copy-link').textContent = 'Copiar link';
           }, 2000);
         });
+      });
+    })();
+  </script>
+
+  <script>
+    // Intersection Observer for fade-in
+    (function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('section, header').forEach(function(el) {
+        observer.observe(el);
       });
     })();
   </script>
