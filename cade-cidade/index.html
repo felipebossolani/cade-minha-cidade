@@ -329,6 +329,19 @@
         <ul id="autocomplete-list" class="autocomplete-suggestions"></ul>
         <p class="demo-feedback highlight-green" id="autocomplete-feedback"></p>
       </div>
+      <p>Não precisa de biblioteca pesada. Não precisa de API externa. Uma lista de municípios do IBGE em JSON, um input com evento de digitação, e um filtro. São 20 linhas de JavaScript.</p>
+<pre><code>input.addEventListener('input', (e) => {
+  const termo = e.target.value.toLowerCase()
+  const resultados = cidades.filter(c =>
+    c.nome.toLowerCase().includes(termo)
+  ).slice(0, 10)
+  mostrarSugestoes(resultados)
+})</code></pre>
+      <p>Pronto. Sem dropdown. Sem scroll. Sem "cadê minha cidade?".</p>
+      <p><strong>"Mas e se digitar errado?"</strong></p>
+      <p>O autocomplete é tolerante. Digita "sorocba" e Sorocaba ainda aparece se você implementar busca fuzzy. Mas mesmo sem fuzzy, um includes simples resolve 95% dos casos. O 5% que sobra é infinitamente melhor que scrollar 5.570 opções.</p>
+      <p><strong>"Mas e se a lista de cidades mudar?"</strong></p>
+      <p>O IBGE atualiza a lista de municípios. Baixa o JSON atualizado e substitui. É um arquivo. Uma vez por ano no máximo.</p>
     </section>
 
     <section id="cep">
