@@ -176,6 +176,10 @@
       margin: 24px 0;
     }
 
+    .demo-box select + select {
+      margin-top: 12px;
+    }
+
     .demo-feedback {
       margin-top: 16px;
       font-size: 14px;
@@ -207,6 +211,12 @@
     footer a:hover {
       border-color: #00FF41;
       color: #00FF41;
+    }
+
+    .footer-credit {
+      margin-top: 40px;
+      font-size: 12px;
+      opacity: 0.4;
     }
 
     .share-links {
@@ -370,7 +380,7 @@
         <select id="cascata-estado">
           <option value="">Selecione o estado...</option>
         </select>
-        <select id="cascata-cidade" style="margin-top: 12px" disabled>
+        <select id="cascata-cidade" disabled>
           <option value="">Selecione a cidade...</option>
         </select>
         <p class="counter" id="cascata-counter"></p>
@@ -426,7 +436,7 @@
       <a id="share-linkedin" href="#" target="_blank" rel="noopener">Compartilhar no LinkedIn</a>
       <button id="copy-link">Copiar link</button>
     </div>
-    <p style="margin-top: 40px; font-size: 12px; opacity: 0.4;">Um manifesto de <a href="https://github.com/felipebossolani" target="_blank" rel="noopener">Felipe Bossolani</a>.</p>
+    <p class="footer-credit">Um manifesto de <a href="https://github.com/felipebossolani" target="_blank" rel="noopener">Felipe Bossolani</a>.</p>
   </footer>
 
   <script>
