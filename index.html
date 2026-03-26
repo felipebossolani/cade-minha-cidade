@@ -467,7 +467,7 @@
           select._interval = setInterval(function() {
             if (!started) { clearInterval(select._interval); return; }
             var elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-            counter.textContent = 'Tempo: ' + elapsed + 's — ' + (select.selectedIndex) + ' de 5.570';
+            counter.textContent = 'Tempo: ' + elapsed + 's';
           }, 100);
         }
       });
