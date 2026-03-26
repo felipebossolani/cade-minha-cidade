@@ -359,6 +359,12 @@
   </main>
 
   <footer>
+    <div class="share-links">
+      <a id="share-twitter" href="#" target="_blank" rel="noopener">Compartilhar no Twitter/X</a>
+      <a id="share-linkedin" href="#" target="_blank" rel="noopener">Compartilhar no LinkedIn</a>
+      <button id="copy-link">Copiar link</button>
+    </div>
+    <p style="margin-top: 40px; font-size: 12px; opacity: 0.4;">Um manifesto de <a href="https://github.com/felipebossolani" target="_blank" rel="noopener">Felipe Bossolani</a>.</p>
   </footer>
 
   <script>
@@ -540,6 +546,26 @@
         if (!e.target.closest('#autocomplete-input') && !e.target.closest('#autocomplete-list')) {
           list.innerHTML = '';
         }
+      });
+    })();
+  </script>
+
+  <script>
+    // Share links
+    (function() {
+      const url = 'https://felipebossolani.github.io/cade-cidade/';
+      const text = 'Cadê minha Cidade? — O Brasil tem 5.570 municípios. E alguém colocou todos num dropdown.';
+
+      document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+      document.getElementById('share-linkedin').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
+
+      document.getElementById('copy-link').addEventListener('click', function() {
+        navigator.clipboard.writeText(url).then(function() {
+          document.getElementById('copy-link').textContent = 'Link copiado!';
+          setTimeout(function() {
+            document.getElementById('copy-link').textContent = 'Copiar link';
+          }, 2000);
+        });
       });
     })();
   </script>
