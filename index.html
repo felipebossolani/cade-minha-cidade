@@ -453,12 +453,20 @@
           startTime = Date.now();
           started = true;
           counter.textContent = 'Cronômetro iniciado... 0 de 5.570';
-          const interval = setInterval(function() {
-            if (!started) { clearInterval(interval); return; }
-            const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+          if (select._interval) clearInterval(select._interval);
+          select._interval = setInterval(function() {
+            if (!started) { clearInterval(select._interval); return; }
+            var elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
             counter.textContent = 'Tempo: ' + elapsed + 's — ' + (select.selectedIndex) + ' de 5.570';
           }, 100);
-          select._interval = interval;
+        }
+      });
+
+      select.addEventListener('blur', function() {
+        if (started && select.value === '') {
+          started = false;
+          if (select._interval) clearInterval(select._interval);
+          counter.textContent = '';
         }
       });
 
