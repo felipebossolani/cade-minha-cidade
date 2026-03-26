@@ -343,7 +343,7 @@
     <section id="opcoes">
       <h2>5.570 opções.</h2>
       <p>Em um dropdown. Sem filtro. Em 2026.</p>
-      <p>Tem estado com 645 municípios. São Paulo. Minas Gerais tem 853. Você vai scrollar por 853 nomes pra achar Uberlândia?</p>
+      <p>Tem estado com 645 municípios. São Paulo. Minas Gerais tem 853. Você vai scrollar por 853 nomes para achar Uberlândia?</p>
       <p>E o pior: você já sabe a resposta. Você sabe onde mora. Você sabe digitar. Mas o formulário não te deixa. Ele te dá uma lista. Enorme. Ordenada alfabeticamente. E te deseja boa sorte.</p>
     </section>
 
@@ -356,7 +356,7 @@
         <p class="counter" id="dropdown-counter"></p>
         <p class="demo-feedback" id="dropdown-feedback"></p>
       </div>
-      <p>Achou sua cidade? Quanto tempo levou? Quantos scrolls? Numa lista de 5.570, sua cidade é agulha no palheiro.</p>
+      <p>Achou sua cidade? Quanto tempo levou? Quantos scrolls? Em uma lista de 5.570, sua cidade é agulha no palheiro.</p>
     </section>
 
     <section id="demo-cascata">
@@ -374,7 +374,7 @@
         <p class="demo-feedback" id="cascata-feedback"></p>
       </div>
       <p>Melhor? Um pouco. Mas se você é de São Paulo, ainda são 645 cidades. Minas, 853. Bahia, 417. Continua scrollando.</p>
-      <p>E se a lista demora pra carregar? E se você seleciona o estado errado e tem que voltar? E no celular, onde o dropdown nativo ocupa a tela inteira com uma roletinha?</p>
+      <p>E se a lista demora para carregar? E se você seleciona o estado errado e tem que voltar? E no celular, onde o dropdown nativo ocupa a tela inteira com uma roletinha?</p>
       <p>É menos pior. Ainda é ruim.</p>
     </section>
 
@@ -468,7 +468,7 @@
           const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
           const cidade = MUNICIPIOS[select.value][0];
           counter.textContent = '';
-          feedback.innerHTML = 'Levou <span class="highlight-yellow">' + elapsed + ' segundos</span> pra achar <strong>' + cidade + '</strong> entre <span class="highlight-red">5.570 opções</span>.';
+          feedback.innerHTML = 'Levou <span class="highlight-yellow">' + elapsed + ' segundos</span> para achar <strong>' + cidade + '</strong> entre <span class="highlight-red">5.570 opções</span>.';
         }
       });
     })();
